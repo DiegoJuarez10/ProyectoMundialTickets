@@ -4,35 +4,43 @@
  */
 package Modelo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class PartidoModelo {
+   
     int id;
     String equipo_local;
     String equipo_visitante;
-    LocalDateTime fecha;
+    LocalDate fecha;
+    String hora;
+    String fase;
     String estadio;
     String ciudad;
     int capacidad;
-    boolean estado;
+    String estado;
 
     public PartidoModelo() {
     }
 
-    public PartidoModelo(int id, String equipo_local, String equipo_visitante, LocalDateTime fecha, String estadio, String ciudad, int capacidad, boolean estado) {
+    public PartidoModelo(int id, String equipo_local, String equipo_visitante, LocalDate fecha, String hora, String fase, String estadio, String ciudad, int capacidad, String estado) {
         this.id = id;
         this.equipo_local = equipo_local;
         this.equipo_visitante = equipo_visitante;
         this.fecha = fecha;
+        this.hora = hora;
+        this.fase = fase;
         this.estadio = estadio;
         this.ciudad = ciudad;
         this.capacidad = capacidad;
         this.estado = estado;
     }
 
-    public PartidoModelo(String equipo_local, String equipo_visitante, String estadio, String ciudad, int capacidad) {
+    public PartidoModelo(String equipo_local, String equipo_visitante, LocalDate fecha, String hora, String fase, String estadio, String ciudad, int capacidad) {
         this.equipo_local = equipo_local;
         this.equipo_visitante = equipo_visitante;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.fase = fase;
         this.estadio = estadio;
         this.ciudad = ciudad;
         this.capacidad = capacidad;
@@ -62,11 +70,11 @@ public class PartidoModelo {
         this.equipo_visitante = equipo_visitante;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -94,14 +102,33 @@ public class PartidoModelo {
         this.capacidad = capacidad;
     }
 
-    public boolean isEstado() {
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getFase() {
+        return fase;
+    }
+
+    public void setFase(String fase) {
+        this.fase = fase;
+    }
+    
     
     
     
 }
+ 

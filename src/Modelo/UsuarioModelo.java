@@ -29,8 +29,8 @@ public class UsuarioModelo{
         this.password = password;
         this.rol = rol;
         
-    }
-
+    } 
+    
     public int getId() {
         return id;
     }

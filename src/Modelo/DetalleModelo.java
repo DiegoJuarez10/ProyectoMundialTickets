@@ -70,6 +70,8 @@ public class DetalleModelo {
     }
 
     
+    
+    
     // Metodos 
     public double subtotal(){
         return cantidad * precio;

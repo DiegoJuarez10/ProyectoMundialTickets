@@ -1,10 +1,16 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Modelo;
-  
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
+/**
+ *
+ * @author yorch
+ */
 public class TicketModelo {
-      int Id;
+   int Id;
       int Partido_id;
       LocalDateTime Fecha_partido;
       String Numero_asiento;
@@ -89,7 +95,5 @@ public class TicketModelo {
 
     public void setEstado(String Estado) {
         this.Estado = Estado;
-    }
-         
-    
+    }    
 }

@@ -8,16 +8,16 @@ package Vista;
  *
  * @author 90NR0JE7M002D0
  */
-public class Cliente extends javax.swing.JFrame {
+public class LoginCliente extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Cliente.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginCliente.class.getName());
 
     /**
      * Creates new form Cliente
      */
-    public Cliente() {
+    public LoginCliente() {
         initComponents();
-        getContentPane().setBackground(new java.awt.Color(15, 25, 35));
+         getContentPane().setBackground(new java.awt.Color(45, 70, 95));
     }
 
     /**
@@ -178,9 +178,7 @@ public class Cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-          MenuCompras menu = new MenuCompras();
-          menu.setVisible(true); 
-          this.dispose();
+      
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
@@ -205,7 +203,7 @@ public class Cliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Cliente().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new LoginCliente().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

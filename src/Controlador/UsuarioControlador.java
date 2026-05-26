@@ -13,7 +13,7 @@ public class UsuarioControlador{
     UsuarioModelo U = new UsuarioModelo(username, password, rol);
     boolean resultado = dao.agregar(U);
     return resultado;
-    } 
+    }  
     
     public boolean actualizarUsuario(int id, String username, String password, String rol){
     UsuarioModelo U = new UsuarioModelo(id, username, password, rol);

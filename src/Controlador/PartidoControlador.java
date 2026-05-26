@@ -1,27 +1,36 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Controlador;
 
 import DAO.PartidoDao;
 import Modelo.PartidoModelo;
 import java.util.List;
-import java.time.LocalDateTime;
+ import java.time.LocalDate;
 
-public class PartidoControlador { 
-    
-     private final PartidoDao dao = new PartidoDao(); 
-     
+/**
+ *
+ * @author DIEGO JUAREZ
+ */
+public class PartidoControlador {
+     private final PartidoDao dao = new PartidoDao();
 public List <PartidoModelo> obtenerPartido(){
     return dao.obtenerTodos();
 }
-public void crearPartido(String equipo_local, String equipo_visitante, String estadio, String ciudad, int capacidad){
-    PartidoModelo partido = new PartidoModelo(equipo_local, equipo_visitante, estadio, ciudad, capacidad);
+public void crearPartido(String equipo_local, String equipo_visitante, LocalDate fecha, String hora, String fase, String estadio, String ciudad, int capacidad){
+    PartidoModelo partido = new PartidoModelo(equipo_local, equipo_visitante, fecha, hora, fase, estadio, ciudad, capacidad);
    dao.guardar(partido);
 }
-public void modificarCliente(int id,String equipo_local, String equipo_visitante, LocalDateTime fecha, String estadio, String ciudad, int capacidad, boolean estado ){
-    PartidoModelo partido = new PartidoModelo(id, equipo_local, equipo_visitante, fecha, estadio, ciudad, capacidad, estado);
+public void modificarPartido(int id, String equipo_local, String equipo_visitante, LocalDate fecha, String hora, String fase, String estadio, String ciudad, int capacidad){
+    PartidoModelo partido = new PartidoModelo(id, equipo_local, equipo_visitante, fecha, hora, fase, estadio, ciudad, capacidad, "DISPONIBLE");
     dao.actualizar(partido);
 }
-public void eliminarCliente(int id){
-    dao.eliminar(id);
-}
+public void cambiarPartido(int id, String estado){
+    dao.cambiarEstado(id, estado);
+}    
+public List<PartidoModelo> buscarPorSeleccion(String seleccion) {
+        return dao.buscarPorSeleccion(seleccion);
+    }
+
 }

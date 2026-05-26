@@ -1,8 +1,7 @@
 package Dao;
 
 import Modelo.DetalleModelo;
-import conexion.CreateConnection;
-
+import Conexion.CreateConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,7 +10,7 @@ public class DetalleDao {
 
     String qry = "";
 
-    CreateConnection cn = new CreateConnection();
+    CreateConnection conFactory = new CreateConnection();
 
     public boolean insertar(DetalleModelo detalle){
         qry = "INSERT INTO public.detalle_venta "
@@ -19,7 +18,7 @@ public class DetalleDao {
                 + "VALUES(?,?,?,?)";
         try{
 
-            Connection con = cn.getConnection();
+            Connection con = conFactory.getConnection();
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setInt(1, detalle.getVenta_id());
             ps.setInt(2, detalle.getTicket_id());

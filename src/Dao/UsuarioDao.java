@@ -2,7 +2,7 @@
 package dao;
 // Importamos las librerias
 import modelo.UsuarioModelo;
-import conexion.CreateConnection;
+import Conexion.CreateConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,28 @@ private final  CreateConnection connFactory = new CreateConnection();
     }
     return false;
     } 
+    
+    
+    public UsuarioModelo login(String username, String password) {
+    String query = "SELECT * FROM usuario WHERE username = ? AND password = ? AND rol = 'VENDEDOR' AND estado = TRUE";
+    try (Connection conn = connFactory.getConnection();
+         PreparedStatement ps = conn.prepareStatement(query)) {
+        ps.setString(1, username);
+        ps.setString(2, password);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new UsuarioModelo(
+                rs.getInt("id"),
+                rs.getString("username"),
+                rs.getString("password"),
+                rs.getString("rol")
+            );
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
     
     public boolean actualizar(UsuarioModelo U){
     String query = "UPDATE usuario SET username=?, password=?, rol=? WHERE id=?";

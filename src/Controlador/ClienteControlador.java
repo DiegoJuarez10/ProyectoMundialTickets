@@ -10,9 +10,9 @@ public class ClienteControlador {
 public List <ClienteModelo> obtenerClientes(){
     return dao.obtenerTodos();
 }
-public void registrarCliente(String nombre, String apellido, String nit, String email, String direccion){
+public int registrarCliente(String nombre, String apellido, String nit, String email, String direccion){
     ClienteModelo cli = new ClienteModelo(0, nombre, apellido, nit, email, direccion);
-   dao.guardar(cli);
+    return dao.guardar(cli);
 }
 public void modificarCliente(int id,String nombre, String apellido, String nit, String email, String direccion){
     ClienteModelo cli = new ClienteModelo(id, nombre, apellido, nit, email, direccion);

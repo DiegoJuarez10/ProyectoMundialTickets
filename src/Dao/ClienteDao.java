@@ -1,7 +1,7 @@
 
 package DAO;
 import Modelo.ClienteModelo;
-import conexion.CreateConnection;
+import Conexion.CreateConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
@@ -40,25 +40,26 @@ public class ClienteDao {
         return lista;
     }
     
-    public boolean guardar(ClienteModelo cli){
-        String sql = "INSERT INTO cliente (nombre,apellido,nit, email, direccion) VALUES (?, ?,?,?,?)";
-        
-        try(Connection conn = connFactory.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setString(1, cli.getNombre());
-            ps.setString(2, cli.getApellido());
-            ps.setString(3, cli.getNit());
-            ps.setString(4, cli.getEmail());
-            ps.setString(5, cli.getDireccion());
+    public int guardar(ClienteModelo cli){
+    String sql = "INSERT INTO cliente (nombre,apellido,nit, email, direccion) VALUES (?, ?,?,?,?)";
+    
+    try(Connection conn = connFactory.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+        ps.setString(1, cli.getNombre());
+        ps.setString(2, cli.getApellido());
+        ps.setString(3, cli.getNit());
+        ps.setString(4, cli.getEmail());
+        ps.setString(5, cli.getDireccion());
         ps.executeUpdate();
-            ps.close();
-            conn.close();
-            return true;
         
-    }catch(SQLException e){
-            e.printStackTrace();
+        ResultSet rs = ps.getGeneratedKeys();
+        if(rs.next()){
+            return rs.getInt(1);
         }
-        return false;
+    }catch(SQLException e){
+        e.printStackTrace();
+    }
+    return 0;
 }
     
 public boolean actualizar(ClienteModelo cli){
