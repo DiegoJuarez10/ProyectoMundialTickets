@@ -1,6 +1,6 @@
 package Dao;
 
-import Conexion.CreateConnection;
+import conexion.CreateConnection;
 import Modelo.VentaModelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -4,7 +4,7 @@
  */
 package Vista;
 import java.time.LocalDate;
-import Conexion.CreateConnection;
+import conexion.CreateConnection;
 import java.time.LocalDateTime;
 import Controlador.TicketControlador;
 import Controlador.PartidoControlador;
@@ -85,9 +85,7 @@ public class Spartidos extends javax.swing.JFrame {
 
     jLabel6.setIcon(new ImageIcon(escala));
         
-    }
-
-    
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -275,10 +273,20 @@ public void cargarPartidosFiltrados(String seleccion){
         // TODO add your handling code here:
           int fila = jtseleccion.getSelectedRow();
        if (fila >= 0) {
-        int idPartido = Integer.parseInt(jtseleccion.getValueAt(fila, 0).toString());
-        TICKETDETALLE v = new TICKETDETALLE(idPartido);
-        v.setVisible(true);
-        this.dispose();
+int idPartido = Integer.parseInt(
+    jtseleccion.getValueAt(fila, 0).toString()
+);
+
+PartidoModelo partidoSeleccionado =
+        controlador.buscarPorId(idPartido);
+
+TICKETDETALLE v = new TICKETDETALLE(
+        idPartido, partidoSeleccionado
+);
+
+v.setVisible(true);
+
+this.dispose();
     } else {
         JOptionPane.showMessageDialog(null, "Seleccione un partido");
     }
@@ -286,6 +294,11 @@ public void cargarPartidosFiltrados(String seleccion){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+
+    LoginSoporte login = new LoginSoporte();
+    login.setVisible(true);
+    login.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
        
     /**

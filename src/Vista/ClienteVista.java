@@ -5,9 +5,11 @@
 package Vista;
 
 import Controlador.ClienteControlador;
+import Modelo.ClienteModelo;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.AlphaComposite;
+import Modelo.PartidoModelo;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -21,14 +23,16 @@ public class ClienteVista extends javax.swing.JFrame {
     private final ClienteControlador controlador = new ClienteControlador();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteVista.class.getName());
 private int id = 0;
+private PartidoModelo partido;
 private TICKETDETALLE ticketDetalle;
 private javax.swing.table.DefaultTableModel modeloSeleccionados;
     /**
      * Creates new form ClienteVista
      */
 
-    public ClienteVista(TICKETDETALLE ticketDetalle, javax.swing.table.DefaultTableModel modeloSeleccionados) {
+    public ClienteVista(TICKETDETALLE ticketDetalle, javax.swing.table.DefaultTableModel modeloSeleccionados, PartidoModelo partido) {
         initComponents();
+        this.partido = partido;
 this.ticketDetalle = ticketDetalle;
 this.modeloSeleccionados = modeloSeleccionados;
  getContentPane().setBackground(new java.awt.Color(46, 125, 90));
@@ -256,8 +260,29 @@ this.modeloSeleccionados = modeloSeleccionados;
         String nit = txtNit.getText().trim();
             if(nit.isEmpty()){
         nit = "CF";  }
-        id = controlador.registrarCliente(txtNombre.getText(), txtApellido.getText(), nit, txtEmail.getText(), txtDireccion.getText());
-           PagoTicket pago = new PagoTicket(this, modeloSeleccionados);
+id = controlador.registrarCliente(
+    txtNombre.getText(),
+    txtApellido.getText(),
+    nit,
+    txtEmail.getText(),
+    txtDireccion.getText()
+);
+
+ClienteModelo cliente = new ClienteModelo(
+    id,
+    txtNombre.getText(),
+    txtApellido.getText(),
+    nit,
+    txtEmail.getText(),
+    txtDireccion.getText()
+);
+
+PagoTicket pago = new PagoTicket(
+    this,
+    cliente,
+    modeloSeleccionados,
+        partido
+);
     pago.setVisible(true);
     this.setVisible(false);
     
@@ -349,11 +374,7 @@ this.modeloSeleccionados = modeloSeleccionados;
         //</editor-fold>
 
         /* Create and display the form */
-  TICKETDETALLE ticket = new TICKETDETALLE();
-    javax.swing.table.DefaultTableModel modelo =
-            new javax.swing.table.DefaultTableModel();
-    ClienteVista vista = new ClienteVista(ticket, modelo);
-    vista.setVisible(true);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

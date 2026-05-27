@@ -32,5 +32,8 @@ public void cambiarPartido(int id, String estado){
 public List<PartidoModelo> buscarPorSeleccion(String seleccion) {
         return dao.buscarPorSeleccion(seleccion);
     }
+public PartidoModelo buscarPorId(int id){
+    return dao.buscarPorId(id);
+}
 
 }

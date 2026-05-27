@@ -4,7 +4,7 @@
  */
 package Dao;
 
-import Conexion.CreateConnection;
+import conexion.CreateConnection;
 import Modelo.TicketModelo;
 import Modelo.TicketPartidoDTO;
 import java.sql.Connection;

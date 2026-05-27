@@ -4,6 +4,7 @@
  */
 package Vista;
   import Controlador.TicketControlador;
+   import Modelo.ClienteModelo;
   import Controlador.PartidoControlador;
   import Modelo.TicketModelo;
   import Modelo.TicketPartidoDTO;
@@ -20,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author DIEGO JUAREZ
  */
 public class PagoTicket extends javax.swing.JFrame {
+    
      private final TicketControlador controlador = new TicketControlador();
      private final VentaModelo venta = new VentaModelo();
         private DefaultTableModel modeloTabla = new DefaultTableModel(
@@ -30,9 +32,10 @@ public class PagoTicket extends javax.swing.JFrame {
     /**
      * Creates new form PagoTicket
      */
-
+ private PartidoModelo partido;
     private ClienteVista clienteVista;
-
+    private DefaultTableModel modeloTickets;
+private ClienteModelo cliente;
 public PagoTicket(ClienteVista clienteVista) {
     initComponents();
     jSubtotal.setEditable(false);
@@ -69,11 +72,13 @@ jtTicket.setModel(modeloTabla);
 
 calcularPago();
 }
-public PagoTicket(ClienteVista clienteVista, DefaultTableModel modeloTickets){
+public PagoTicket(ClienteVista clienteVista, ClienteModelo cliente, DefaultTableModel modeloTickets, PartidoModelo partido){
     initComponents();
 
     this.clienteVista = clienteVista;
-
+    this.cliente = cliente;
+this.modeloTickets = modeloTickets;
+this.partido = partido;
     jtTicket.setModel(modeloTabla);
 
 
@@ -378,44 +383,36 @@ this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-JOptionPane.showMessageDialog(this,"COMPRA EXITOSA!");
+double subtotal = Double.parseDouble(jSubtotal.getText());
 
+    double descuento;
 
-    String asiento = jtTicket.getValueAt(0,1).toString();
-    String seccion = jtTicket.getValueAt(0,2).toString();
-    String precio = jtTicket.getValueAt(0,3).toString();
+    if(jDescuento.getText().equals("No se aplican descuentos")){
+        descuento = 0;
+    } else {
+        descuento = Double.parseDouble(jDescuento.getText());
+    }
 
-    Factura fac = new Factura(
+    double iva = Double.parseDouble(jIva.getText());
 
-        "Guatemala", // local
-        "México", // visita
-
-        "Azteca", // estadio
-        "15/07/2026", // fecha
-        "18:00", // hora
-        "CDMX", // ciudad
-
-        asiento,
-        seccion,
-        "FINAL", // fase
-
-        precio,
-        jIva.getText(),
-        jDescuento.getText(),
-        jTotal.getText(),
-
-        "Juan",
-        "Pérez",
-        "1234567-8",
-        "juan@gmail.com",
-        "Guatemala"
-
-    );
+    double total = Double.parseDouble(jTotal.getText());
+for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+        int ticketId = Integer.parseInt(modeloTabla.getValueAt(i, 0).toString());
+        controlador.cambiarEstado(ticketId, "VENDIDO");
+    }
+Factura fac = new Factura(
+    cliente,
+    partido,
+    modeloTickets,
+    subtotal,
+    descuento,
+    iva,
+    total
+);
 
     fac.setVisible(true);
 
-    this.dispose();
-       this.dispose();       
+    this.dispose();      
     }//GEN-LAST:event_btnPagarActionPerformed
 
     /**
@@ -440,7 +437,7 @@ JOptionPane.showMessageDialog(this,"COMPRA EXITOSA!");
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PagoTicket(null).setVisible(true));
+     //   java.awt.EventQueue.invokeLater(() -> new PagoTicket(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

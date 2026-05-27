@@ -27,13 +27,15 @@ import javax.swing.ImageIcon;
     private DefaultTableModel modeloTickets = new DefaultTableModel(
         new Object[]{"ID Ticket","Asiento","Sección","Precio","Estado"},0
     );
+    private PartidoModelo partido;
         private int partido_id;
 
         /**
          * Creates new form TICKETDETALLE
          */
-        public TICKETDETALLE() {
+        public TICKETDETALLE(PartidoModelo partido) {
             initComponents();
+                this.partido = partido;
             jttickets.setModel(modeloTickets);
             jtseleccionados.setModel(modeloSeleccionados);
             txtasiento.setEditable(false);
@@ -52,9 +54,9 @@ import javax.swing.ImageIcon;
     jLabel6.setIcon(new ImageIcon(escala));
         
         }
-public TICKETDETALLE(int partido_id) {
+public TICKETDETALLE(int partido_id, PartidoModelo partido) {
     initComponents();
-
+this.partido = partido;
     this.partido_id = partido_id;
 
     jttickets.setModel(modeloTickets);
@@ -448,7 +450,7 @@ for(int i = 0; i < modeloSeleccionados.getRowCount(); i++){
     });
 }
 
-ClienteVista cli = new ClienteVista(this, modeloPago);
+ClienteVista cli = new ClienteVista(this, modeloPago, partido);
 
 cli.setVisible(true);
 
@@ -492,7 +494,7 @@ this.setVisible(false);
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TICKETDETALLE().setVisible(true));
+     //   java.awt.EventQueue.invokeLater(() -> new TICKETDETALLE().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

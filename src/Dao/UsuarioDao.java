@@ -2,7 +2,7 @@
 package dao;
 // Importamos las librerias
 import modelo.UsuarioModelo;
-import Conexion.CreateConnection;
+import conexion.CreateConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

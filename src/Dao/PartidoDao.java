@@ -1,6 +1,6 @@
 package DAO;
 
-import Conexion.CreateConnection;
+import conexion.CreateConnection;
 import Modelo.PartidoModelo;
 
 import java.sql.*;
@@ -46,7 +46,39 @@ public class PartidoDao {
 
         return lista;
     }
+public PartidoModelo buscarPorId(int id) {
 
+    String sql = "SELECT * FROM partido WHERE id = ?";
+
+    try(Connection conn = connFactory.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setInt(1, id);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()) {
+
+            return new PartidoModelo(
+                rs.getInt("id"),
+                rs.getString("equipo_local"),
+                rs.getString("equipo_visitante"),
+                rs.getDate("fecha").toLocalDate(),
+                rs.getString("hora"),
+                rs.getString("fase"),
+                rs.getString("estadio"),
+                rs.getString("ciudad"),
+                rs.getInt("capacidad"),
+                rs.getString("estado")
+            );
+        }
+
+    } catch(SQLException e) {
+        e.printStackTrace();
+    }
+
+    return null;
+}
     public List<PartidoModelo> buscarPorSeleccion(String seleccion) {
 
         List<PartidoModelo> lista = new ArrayList<>();

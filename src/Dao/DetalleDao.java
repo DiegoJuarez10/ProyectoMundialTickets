@@ -1,7 +1,7 @@
 package Dao;
 
 import Modelo.DetalleModelo;
-import Conexion.CreateConnection;
+import conexion.CreateConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

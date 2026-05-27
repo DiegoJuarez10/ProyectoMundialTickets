@@ -178,7 +178,9 @@ public class LoginCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-      
+  LoginSoporte login = new LoginSoporte();
+    login.setVisible(true);
+    login.setLocationRelativeTo(null);        
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
