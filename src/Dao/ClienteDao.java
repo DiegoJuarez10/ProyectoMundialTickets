@@ -96,7 +96,50 @@ public boolean eliminar(int id){
 }
     return false;
 }
+public List<ClienteModelo> buscarCliente(String apellido){
+
+    List<ClienteModelo> lista = new ArrayList<>();
+
+    String sql = "SELECT * FROM cliente WHERE apellido LIKE ?";
+
+    try(Connection conn = connFactory.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql)){
+
+        ps.setString(1, "%" + apellido + "%");
+
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+
+            ClienteModelo cliente = new ClienteModelo(
+                rs.getInt("id"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getString("nit"),
+                rs.getString("email"),
+                rs.getString("direccion")
+            );
+
+            lista.add(cliente);
+        }
+
+    } catch(SQLException e){
+        e.printStackTrace();
+    }
+
+    return lista;
 }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

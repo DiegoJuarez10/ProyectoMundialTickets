@@ -31,6 +31,7 @@ public class PartidoVista extends javax.swing.JFrame {
      */
     public PartidoVista() {
         initComponents();
+        setLocationRelativeTo(null);
                  getContentPane().setBackground(new java.awt.Color(45, 70, 95));
          cargarEquipos();
          fasePartido();

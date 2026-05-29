@@ -27,6 +27,7 @@ public class ClienteCrud extends javax.swing.JFrame {
      */
     public ClienteCrud() {
         initComponents();
+        setLocationRelativeTo(null);
         getContentPane().setBackground(new java.awt.Color(45, 70, 95));
          cargarClientes();
          jtCliente.setModel(modeloTabla);

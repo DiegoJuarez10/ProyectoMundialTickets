@@ -35,6 +35,7 @@ import javax.swing.ImageIcon;
          */
         public TICKETDETALLE(PartidoModelo partido) {
             initComponents();
+            setLocationRelativeTo(null);
                 this.partido = partido;
             jttickets.setModel(modeloTickets);
             jtseleccionados.setModel(modeloSeleccionados);
@@ -56,6 +57,7 @@ import javax.swing.ImageIcon;
         }
 public TICKETDETALLE(int partido_id, PartidoModelo partido) {
     initComponents();
+    setLocationRelativeTo(null);
 this.partido = partido;
     this.partido_id = partido_id;
 
@@ -100,6 +102,7 @@ this.partido = partido;
 }
          public TICKETDETALLE(int partido_id, DefaultTableModel seleccionadosPrevios) {
     initComponents(); 
+    setLocationRelativeTo(null);
     this.partido_id = partido_id;
     jttickets.setModel(modeloTickets);
     jtseleccionados.setModel(modeloSeleccionados);
@@ -162,7 +165,6 @@ this.partido = partido;
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         txtasiento = new javax.swing.JTextField();
         btagregar = new javax.swing.JButton();
-        btañadir = new javax.swing.JButton();
         btvolver = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -218,12 +220,6 @@ this.partido = partido;
         btagregar.setText("AGREGAR");
         btagregar.addActionListener(this::btagregarActionPerformed);
 
-        btañadir.setBackground(new java.awt.Color(2, 153, 52));
-        btañadir.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 1, 16)); // NOI18N
-        btañadir.setForeground(new java.awt.Color(243, 236, 236));
-        btañadir.setText("SELECCION DE PARTIDO");
-        btañadir.addActionListener(this::btañadirActionPerformed);
-
         btvolver.setBackground(new java.awt.Color(232, 55, 55));
         btvolver.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 1, 16)); // NOI18N
         btvolver.setForeground(new java.awt.Color(243, 236, 236));
@@ -271,14 +267,13 @@ this.partido = partido;
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btañadir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(19, 19, 19))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(290, 290, 290)
+                        .addGap(324, 324, 324)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,9 +330,7 @@ this.partido = partido;
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(btañadir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(345, 345, 345)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btvolver))
@@ -401,7 +394,7 @@ this.partido = partido;
     int idTicket = Integer.parseInt(jtseleccionados.getValueAt(fila, 0).toString());
     for (TicketPartidoDTO dto : ticketControlador.obtenerTicketsConPartido()) {
         if (dto.getTicketId() == idTicket) {
-            // Regresar el ticket a la tabla de abajo (solo datos básicos)
+
             modeloTickets.addRow(new Object[]{
                 dto.getTicketId(),
                 dto.getNumeroAsiento(),
@@ -414,13 +407,6 @@ this.partido = partido;
     }
     modeloSeleccionados.removeRow(fila);
     }//GEN-LAST:event_btcancelarActionPerformed
-
-    private void btañadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btañadirActionPerformed
-        // TODO add your handling code here:
-    DefaultTableModel seleccionadosPrevios = modeloSeleccionados;
-    this.dispose();
-    new MasPartidos(seleccionadosPrevios).setVisible(true);
-    }//GEN-LAST:event_btañadirActionPerformed
 
     private void btvolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btvolverActionPerformed
         // TODO add your handling code here:
@@ -499,7 +485,6 @@ this.setVisible(false);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btagregar;
-    private javax.swing.JButton btañadir;
     private javax.swing.JButton btcancelar;
     private javax.swing.JButton btvolver;
     private javax.swing.Box.Filler filler1;

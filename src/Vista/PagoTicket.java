@@ -38,6 +38,7 @@ public class PagoTicket extends javax.swing.JFrame {
 private ClienteModelo cliente;
 public PagoTicket(ClienteVista clienteVista) {
     initComponents();
+    setLocationRelativeTo(null);
     jSubtotal.setEditable(false);
     jDescuento.setEditable(false);
     jIva.setEditable(false);
@@ -74,13 +75,12 @@ calcularPago();
 }
 public PagoTicket(ClienteVista clienteVista, ClienteModelo cliente, DefaultTableModel modeloTickets, PartidoModelo partido){
     initComponents();
-
+setLocationRelativeTo(null);
     this.clienteVista = clienteVista;
     this.cliente = cliente;
 this.modeloTickets = modeloTickets;
 this.partido = partido;
     jtTicket.setModel(modeloTabla);
-
 
  for (int i = 0; i < modeloTickets.getRowCount(); i++) {
 
@@ -93,7 +93,7 @@ this.partido = partido;
 
         modeloTabla.addRow(fila);
     }
-
+System.out.println(partido);
     calcularPago();
         jSubtotal.setEditable(false);
     jDescuento.setEditable(false);
@@ -282,9 +282,8 @@ jLabel13.setIcon(new ImageIcon(escala2));
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(13, 13, 13))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(225, 225, 225)
+                        .addGap(256, 256, 256)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -292,13 +291,15 @@ jLabel13.setIcon(new ImageIcon(escala2));
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVolver)
-                        .addGap(54, 54, 54))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnVolver)
+                            .addGap(54, 54, 54))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,7 +385,7 @@ this.dispose();
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
 double subtotal = Double.parseDouble(jSubtotal.getText());
-
+System.out.println(partido);
     double descuento;
 
     if(jDescuento.getText().equals("No se aplican descuentos")){
@@ -392,7 +393,17 @@ double subtotal = Double.parseDouble(jSubtotal.getText());
     } else {
         descuento = Double.parseDouble(jDescuento.getText());
     }
+if(partido == null){
+    JOptionPane.showMessageDialog(this,
+        "No se encontró el partido");
+    return;
+}
 
+if(cliente == null){
+    JOptionPane.showMessageDialog(this,
+        "No se encontró el cliente");
+    return;
+}
     double iva = Double.parseDouble(jIva.getText());
 
     double total = Double.parseDouble(jTotal.getText());
@@ -400,6 +411,7 @@ for (int i = 0; i < modeloTabla.getRowCount(); i++) {
         int ticketId = Integer.parseInt(modeloTabla.getValueAt(i, 0).toString());
         controlador.cambiarEstado(ticketId, "VENDIDO");
     }
+String metodoPago = jComboBox1.getSelectedItem().toString();
 Factura fac = new Factura(
     cliente,
     partido,
@@ -407,7 +419,8 @@ Factura fac = new Factura(
     subtotal,
     descuento,
     iva,
-    total
+    total,
+    metodoPago
 );
 
     fac.setVisible(true);

@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author 90NR0JE7M002D0
@@ -17,12 +20,22 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
      */
     public MenuPrincipalAdmin() {
         initComponents(); 
+        setLocationRelativeTo(null);
           getContentPane().setBackground(new java.awt.Color(45, 70, 95));
+
     jMenuBar1.setBackground(new java.awt.Color(24, 95, 165));
     jMenuBar1.setOpaque(true);
-    jmPartido.setForeground(java.awt.Color.WHITE);
-    jmTicket.setForeground(java.awt.Color.WHITE);
-    jmClientes.setForeground(java.awt.Color.WHITE);
+
+    
+          ImageIcon icono = new ImageIcon(getClass().getResource("/Img/FONDOMUNDIALFIFA.jpeg"));
+    Image imagen = icono.getImage();
+    Image escala = imagen.getScaledInstance(
+            jLabel1.getWidth(),
+            jLabel1.getHeight(),
+            Image.SCALE_SMOOTH
+    );
+
+    jLabel1.setIcon(new ImageIcon(escala));
     }
 
     /**
@@ -42,7 +55,11 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        btnVolver = new javax.swing.JButton();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmPartido = new javax.swing.JMenu();
@@ -53,6 +70,8 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
         jmCrudClientes = new javax.swing.JMenuItem();
         jmUsuarios = new javax.swing.JMenu();
         jmUsuario = new javax.swing.JMenuItem();
+        jmUsuarios1 = new javax.swing.JMenu();
+        jmUsuario1 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -73,18 +92,24 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         jMenuBar2.add(jMenu2);
 
+        jMenuItem3.setText("jMenuItem3");
+
+        jMenu3.setText("File");
+        jMenuBar3.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar3.add(jMenu4);
+
+        jMenu5.setText("jMenu5");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("🏆 Sistema de Tickets Admin — Mundial 2026");
 
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(this::btnVolverActionPerformed);
-
         jLabel1.setFont(new java.awt.Font("FWC2026 UltraCondensed Medium", 0, 28)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("BIENVENIDO AL SISTEMA DE TAQUILLA DEL MUNDIAL");
 
         jmPartido.setBackground(new java.awt.Color(255, 255, 255));
-        jmPartido.setForeground(new java.awt.Color(255, 255, 255));
+        jmPartido.setForeground(new java.awt.Color(0, 0, 0));
         jmPartido.setText("Crear Partido");
 
         jmPartidos.setText("Partidos");
@@ -94,6 +119,7 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
         jMenuBar1.add(jmPartido);
 
         jmTicket.setBackground(new java.awt.Color(255, 255, 255));
+        jmTicket.setForeground(new java.awt.Color(0, 0, 0));
         jmTicket.setText("Crear Ticket");
 
         jmCrearTicket.setText("Ticket");
@@ -103,7 +129,7 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
         jMenuBar1.add(jmTicket);
 
         jmClientes.setBackground(new java.awt.Color(255, 255, 255));
-        jmClientes.setForeground(new java.awt.Color(255, 255, 255));
+        jmClientes.setForeground(new java.awt.Color(0, 0, 0));
         jmClientes.setText("Crud CIientes");
 
         jmCrudClientes.setText("Clientes");
@@ -113,7 +139,7 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
         jMenuBar1.add(jmClientes);
 
         jmUsuarios.setBackground(new java.awt.Color(255, 255, 255));
-        jmUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        jmUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         jmUsuarios.setText("Crud Usuarios");
 
         jmUsuario.setText("Usuarios");
@@ -122,29 +148,27 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
 
         jMenuBar1.add(jmUsuarios);
 
+        jmUsuarios1.setBackground(new java.awt.Color(255, 255, 255));
+        jmUsuarios1.setForeground(new java.awt.Color(0, 0, 0));
+        jmUsuarios1.setText("Volver");
+
+        jmUsuario1.setText("Login");
+        jmUsuario1.addActionListener(this::jmUsuario1ActionPerformed);
+        jmUsuarios1.add(jmUsuario1);
+
+        jMenuBar1.add(jmUsuarios1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(btnVolver)
-                .addGap(25, 25, 25))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         );
 
         pack();
@@ -174,12 +198,12 @@ public class MenuPrincipalAdmin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jmCrudClientesActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    private void jmUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmUsuario1ActionPerformed
         // TODO add your handling code here:
-        LoginSoporte login = new LoginSoporte();
+                LoginSoporte login = new LoginSoporte();
         login.setVisible(true); 
     this.dispose();
-    }//GEN-LAST:event_btnVolverActionPerformed
+    }//GEN-LAST:event_jmUsuario1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,15 +228,19 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVolver;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JMenu jmClientes;
@@ -222,6 +250,8 @@ try {
     private javax.swing.JMenuItem jmPartidos;
     private javax.swing.JMenu jmTicket;
     private javax.swing.JMenuItem jmUsuario;
+    private javax.swing.JMenuItem jmUsuario1;
     private javax.swing.JMenu jmUsuarios;
+    private javax.swing.JMenu jmUsuarios1;
     // End of variables declaration//GEN-END:variables
 }

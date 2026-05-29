@@ -32,6 +32,7 @@ private javax.swing.table.DefaultTableModel modeloSeleccionados;
 
     public ClienteVista(TICKETDETALLE ticketDetalle, javax.swing.table.DefaultTableModel modeloSeleccionados, PartidoModelo partido) {
         initComponents();
+        setLocationRelativeTo(null);
         this.partido = partido;
 this.ticketDetalle = ticketDetalle;
 this.modeloSeleccionados = modeloSeleccionados;
@@ -52,7 +53,7 @@ this.modeloSeleccionados = modeloSeleccionados;
 
     ClienteVista() {
         initComponents();
-
+setLocationRelativeTo(null);
         getContentPane().setBackground(new java.awt.Color(46, 125, 90));
 
         ImageIcon icono = new ImageIcon(getClass().getResource("/Imagenes/WEARE26VERDE.png"));
@@ -94,6 +95,9 @@ this.modeloSeleccionados = modeloSeleccionados;
         txtEmail = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,6 +152,16 @@ this.modeloSeleccionados = modeloSeleccionados;
         btnActualizar.setForeground(new java.awt.Color(243, 236, 236));
         btnActualizar.setText("Modificar Registro");
         btnActualizar.addActionListener(this::btnActualizarActionPerformed);
+
+        jMenu1.setText("Cliente existente");
+
+        jMenuItem1.setText("Seleccione aquí");
+        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,7 +251,7 @@ this.modeloSeleccionados = modeloSeleccionados;
                         .addGap(27, 27, 27)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 77, Short.MAX_VALUE)
+                        .addGap(9, 54, Short.MAX_VALUE)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40))
                     .addGroup(layout.createSequentialGroup()
@@ -276,13 +290,8 @@ ClienteModelo cliente = new ClienteModelo(
     txtEmail.getText(),
     txtDireccion.getText()
 );
-
-PagoTicket pago = new PagoTicket(
-    this,
-    cliente,
-    modeloSeleccionados,
-        partido
-);
+System.out.println(partido);
+PagoTicket pago = new PagoTicket(this,cliente,modeloSeleccionados,partido);
     pago.setVisible(true);
     this.setVisible(false);
     
@@ -352,6 +361,15 @@ PagoTicket pago = new PagoTicket(
     this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+   MenuPrincipalVendedor menu = new MenuPrincipalVendedor(this, modeloSeleccionados, partido);
+
+   menu.setVisible(true);
+
+   this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -390,6 +408,9 @@ PagoTicket pago = new PagoTicket(
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEmail;

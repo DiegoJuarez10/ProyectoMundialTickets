@@ -21,4 +21,7 @@ public void modificarCliente(int id,String nombre, String apellido, String nit, 
 public void eliminarCliente(int id){
     dao.eliminar(id);
 }
+public List<ClienteModelo> buscarCliente(String apellido){
+    return dao.buscarCliente(apellido);
+}
 }

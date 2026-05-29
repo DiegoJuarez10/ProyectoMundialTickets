@@ -15,6 +15,7 @@ import java.util.Properties;
 
  
 public class CreateConnection {
+
     static Properties config = new Properties();
     String hostname = null;
     String port = null;
@@ -24,49 +25,54 @@ public class CreateConnection {
    
     
     public CreateConnection (){
- 
+        String path ="C:\\Proyectos Progra Netbeans\\ProyectoFinalProgra1\\src\\conexion\\db_config.properties"; 
+                
+        InputStream in = null;
         try {
-        System.out.println(
-            getClass().getResource("db_config.properties")
-        );
-            InputStream in =
-                    getClass().getResourceAsStream("db_config.properties");
-
+            
+            in = Files.newInputStream(Paths.get(path));
             config.load(in);
-
-            hostname = config.getProperty("hostname");
-            port = config.getProperty("port");
-            database = config.getProperty("database");
-            username = config.getProperty("username");
-            password = config.getProperty("password");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            in.close();
+            
+            }   catch (IOException ex) {
+                        ex.printStackTrace();
+            }   finally{
+                    try{
+                            in.close();
+                        }catch (IOException ex ) {
+                                ex.printStackTrace();
+                                 }
+                }
+        loadProperties();
     }
-
-    public Connection getConnection() throws SQLException {
-
-        String jdbcUrl =
-                "jdbc:postgresql://"
-                + hostname
-                + ":"
-                + port
-                + "/"
-                + database
-                + "?sslmode=require";
-
-        Connection conn =
-                DriverManager.getConnection(
-                        jdbcUrl,
-                        username,
-                        password
-                );
-
-        System.out.println("Conexion establecida");
-
-        return conn;
+    public void loadProperties(){
+                hostname = config.getProperty("hostname");
+                port  = config.getProperty("port");
+                database = config.getProperty("database");
+                username =   config.getProperty("username");
+                password =   config.getProperty("password");
+               
+                System.out.println(hostname);
+                System.out.println(port);
+                System.out.println(database);
+                System.out.println(username);
+                System.out.println(password);
+                
+        }
+    
+    public Connection getConnection() throws SQLException{
+    Connection conn = null;
+    String jdbcUrl = "jdbc:postgresql://"+this.hostname+":"+
+            this.port + "/" + this.database;
+    conn = DriverManager.getConnection(jdbcUrl,username,password);
+    System.out.println("Conexion establecida");
+    
+    return conn;
     }
     
     
 }
+
+    
+    
+
